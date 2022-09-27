@@ -18,7 +18,6 @@ function NewPlantForm({ newPlantFormSubmit }) {
     })
   }
 
-
   return (
     <div className="new-plant-form">
       <h2>New Plant</h2>
