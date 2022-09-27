@@ -4,6 +4,17 @@ function PlantCard({ plant:{id, name, image, price}, handleDelete, setPlants, pl
   const [inStock, setInStock] = useState(true)
   const [updateP, setUpdateP] = useState("")
 
+  function handleDelete(deletePlant){
+    const deleted = plants.filter(plant => plant.id !== deletePlant)
+    setPlants(deleted)
+    fetch(`http://localhost:6001/plants/${deletePlant}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type" : "application/json"
+       }
+      })
+    }
+
   function handleFormSubmit(e) {
     e.preventDefault()
     fetch(`http://localhost:6001/plants/${id}`,{
@@ -32,7 +43,7 @@ function PlantCard({ plant:{id, name, image, price}, handleDelete, setPlants, pl
       )}
       <button onClick={() => handleDelete(id)} style={{ color: "red"}}>Remove</button>
       <form onSubmit={handleFormSubmit}>
-          <input placeholder="Update Price" onChange={(e) => setUpdateP(e.target.value)}></input>
+          <input type="number" placeholder="Update Price" onChange={(e) => setUpdateP(e.target.value)}></input>
           <button>Update</button>
       </form>
     </li>
